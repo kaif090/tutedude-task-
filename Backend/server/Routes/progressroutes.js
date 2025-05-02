@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Progress = require("../models/videoprogress");
 
-// Merge overlapping intervals
+
 function mergeIntervals(intervals) {
   if (!intervals.length) return [];
   intervals.sort((a, b) => a.start - b.start);
@@ -19,7 +19,6 @@ function mergeIntervals(intervals) {
   return merged;
 }
 
-// Save progress
 router.post('/', async (req, res) => {
   const { userId, videoId, newInterval, duration } = req.body;
   try {
@@ -42,7 +41,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get progress
 router.get('/:userId/:videoId', async (req, res) => {
   try {
     const progress = await Progress.findOne({ userId: req.params.userId, videoId: req.params.videoId });
